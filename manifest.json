@@ -7,9 +7,10 @@
     "default_popup": "popup/popup.html",
     "default_icon": "images/icon.png"
   },
-  "host_permissions": [
-    "https://ai.joinhandshake.com/annotations/fellow/task/*",
-    "https://www.multimango.com/tasks/*",
-    "https://www.multimango.com/qa-feedback"
+  "content_scripts": [
+    {
+      "matches": ["https://www.multimango.com/tasks/*"],
+      "js": ["scripts/tasks-script.js"]
+    }
   ]
 }

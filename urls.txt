@@ -1,0 +1,3 @@
+"https://ai.joinhandshake.com/annotations/fellow/task/*",
+"https://www.multimango.com/tasks/*",
+"https://www.multimango.com/qa-feedback"
