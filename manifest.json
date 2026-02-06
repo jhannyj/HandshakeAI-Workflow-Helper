@@ -1,0 +1,15 @@
+{
+  "name": "HandshakeAI Util",
+  "description": "Base Level Extension",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": "images/icon.png"
+  },
+  "host_permissions": [
+    "https://ai.joinhandshake.com/annotations/fellow/task/*",
+    "https://www.multimango.com/tasks/*",
+    "https://www.multimango.com/qa-feedback"
+  ]
+}
