@@ -21,7 +21,7 @@ Since this extension is being installed from a source repository rather than the
 ### 1. Download the Source
 * **Option A:** Clone the repository using Git:
     ```bash
-    git clone https://github.com/jhannyj/HandshakeAI-Browser-Extension.git
+    git clone https://github.com/jhannyj/HandshakeAI-Workflow-Helper.git
     ```
 * **Option B:** Click the green **Code** button on the GitHub page and select **Download ZIP**. Extract the files to a folder on your computer.
 
