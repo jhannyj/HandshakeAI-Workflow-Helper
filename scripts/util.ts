@@ -289,6 +289,7 @@ export async function saveData(key: string, data: any, type: StorageType): Promi
     });
     if (!hasPermission) {
         console.error("Missing required permission: storage to save data.");
+        return false;
     }
 
     let saveOutput;
@@ -322,6 +323,7 @@ export async function loadData<T>(key: string | string[] | Record<string, any>, 
     });
     if (!hasPermission) {
         console.error("Missing required permission: storage to load data.");
+        return null;
     }
 
     let loadOutput;
@@ -375,6 +377,7 @@ export async function removeData(key: string | string[], type: StorageType): Pro
     });
     if (!hasPermission) {
         console.error("Missing required permission: storage to remove data.");
+        return false;
     }
 
     let removeOutput;
