@@ -1,5 +1,7 @@
 # HandshakeAI Workflow Helper
 
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/plgifdgdcgafdjolpicdafjdbmdobekc?label=Available%20in%20Chrome%20Web%20Store&logo=google-chrome&color=4285F4)](https://chromewebstore.google.com/detail/plgifdgdcgafdjolpicdafjdbmdobekc)
+
 **HandshakeAI Workflow Helper** is a productivity-focused browser extension designed to eliminate the manual overhead of synchronizing task data between **Multimango** and **Handshake AI**.
 
 By automating data extraction and entry, this tool ensures your QA feedback and task progress are tracked accurately and reflected in real-time across both platforms.
