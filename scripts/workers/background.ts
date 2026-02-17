@@ -25,9 +25,6 @@ import {
 
 // Service worker actions
 
-//TODO: handle users not logged into Handshake AI or Multimango.
-//TODO: forward errors and info from content scripts to background script for easy of visibility OR add a create log option
-
 export async function run(configs: AppConfigs): Promise<boolean> {
     console.info("Getting task data...");
     const [taskId, taskSlug, taskTabId] = await runTaskData(configs);
