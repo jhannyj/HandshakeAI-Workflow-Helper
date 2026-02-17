@@ -74,6 +74,10 @@ export const CONST_CONFIGS = {
         RUN: 600_000,
         NOTIFICATION: 5_000,
     },
+    EST_TIME: {
+        NUM_NON_TASK_BUTTONS: 3,
+        CONTINUE_BTN_QUERY_SELECTOR: "button[aria-label='Continue']",
+    }
 } as const;
 
 export enum RuntimeMessage {

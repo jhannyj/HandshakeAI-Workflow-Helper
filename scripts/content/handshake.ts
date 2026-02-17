@@ -64,6 +64,21 @@ function validateElementTextContent(elementQuery: string, expectedValues: string
     return expectedValues.every((val, index) => val === values[index]);
 }
 
+async function skipTaskLimitSection(): Promise<boolean> {
+    const allToggleButtons = Array.from(document.querySelectorAll(CONST_CONFIGS.TASKS.OPTIONS_QUERY_SELECTOR));
+    if (allToggleButtons.length > 3) {
+        return true;
+    }
+
+    try {
+        const contButton = document.querySelector(CONST_CONFIGS.EST_TIME.CONTINUE_BTN_QUERY_SELECTOR) as HTMLButtonElement;
+        contButton.click();
+    }catch(e) {
+        console.warn("Could not skip task limit section", e);
+    }
+    return false;
+}
+
 async function selectTask(taskId: string, timeoutMs: number): Promise<boolean> {
     if (validateElementTextContent(CONST_CONFIGS.VERIFICATION_QUERY_SELECTOR, null)) {
         return true;
@@ -208,28 +223,37 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
         }
         const [configs, taskId, taskSlug, ratingsToSubmit] = data;
         console.log("Received handshake data. taskId: ", taskId, "ratings: ", ratingsToSubmit);
-        withRetries(() => selectTask(taskId, configs.epTimeout), configs.epMaxTries, configs.epInterval, "Task Selection").then(
-            task => {
-                if (!task) {
-                    console.error("Task selection failed.");
-                    isProcessingHandshake = false;
-                    sendResponse({ status: "Failed", data: false, error: "Task selection failed"});
-                } else {
-                    console.log("Submitted task selection. Proceeding to ratings...");
-                    submitTaskDetails(taskSlug, ratingsToSubmit, configs.epTimeout, configs.epMaxTries, configs.epInterval).then(success => {
-                        if (success) {
-                            console.log("Ratings submitted successfully.");
+        withRetries(() => skipTaskLimitSection(), configs.epMaxTries, configs.epInterval, "Skip task limit section").then(success => {
+            if (!success) {
+                console.error("Could not skip task limit section.");
+                isProcessingHandshake = false;
+                sendResponse({ status: "Failed", data: false, error: "Could not skip task limit section"});
+            } else {
+                console.log("Skipped task limit section successfully.");
+                withRetries(() => selectTask(taskId, configs.epTimeout), configs.epMaxTries, configs.epInterval, "Task Selection").then(
+                    task => {
+                        if (!task) {
+                            console.error("Task selection failed.");
                             isProcessingHandshake = false;
-                            sendResponse({ status: "Success", data: true });
+                            sendResponse({ status: "Failed", data: false, error: "Task selection failed"});
                         } else {
-                            console.error("Ratings submit failed.");
-                            isProcessingHandshake = false;
-                            sendResponse({ status: "Failed", data: false, error: "Ratings submit failed"});
+                            console.log("Submitted task selection. Proceeding to ratings...");
+                            submitTaskDetails(taskSlug, ratingsToSubmit, configs.epTimeout, configs.epMaxTries, configs.epInterval).then(success => {
+                                if (success) {
+                                    console.log("Ratings submitted successfully.");
+                                    isProcessingHandshake = false;
+                                    sendResponse({ status: "Success", data: true });
+                                } else {
+                                    console.error("Ratings submit failed.");
+                                    isProcessingHandshake = false;
+                                    sendResponse({ status: "Failed", data: false, error: "Ratings submit failed"});
+                                }
+                            })
                         }
-                    })
-                }
+                    }
+                )
             }
-        )
+        })
         return true;
     } else if(msg.action == ContentMessage.SHOW_RESULT) {
         console.log("SHOW_RESULT msg value: ", msg.value);
