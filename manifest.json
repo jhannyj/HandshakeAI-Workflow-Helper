@@ -26,7 +26,7 @@
       "js": ["scripts/content/multimango.ts"]
     },
     {
-      "matches": ["https://ai.joinhandshake.com/fellow/projects/*"],
+      "matches": ["https://ai.joinhandshake.com/fellow/projects/*", "https://ai.joinhandshake.com/annotations/fellow/task/*"],
       "js": ["scripts/content/handshake.ts"]
     }
   ]
