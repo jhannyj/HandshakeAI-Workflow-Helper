@@ -1,11 +1,11 @@
 {
   "name": "HandshakeAI Workflow Helper",
   "description": "Streamline your workflow between Multimango and Handshake AI with automated task tracking and QA feedback synchronization.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "manifest_version": 3,
   "action": {
     "default_popup": "popup/popup.html",
-    "default_icon": "images/icon.png"
+    "default_icon": "images/store-icon-128.png"
   },
   "optional_permissions": [
     "downloads",
