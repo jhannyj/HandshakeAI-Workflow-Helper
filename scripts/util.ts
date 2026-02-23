@@ -401,7 +401,7 @@ export async function removeData(key: string | string[], type: StorageType, log:
 }
 
 export async function getSettingsOrDefault(): Promise<AppConfigs> {
-    const settings: AppConfigs | null = await loadData(StoredData.SETTINGS, CONST_CONFIGS.SETTINGS_STORAGE);
+    const settings: AppConfigs | null = await loadData(StoredData.SETTINGS, CONST_CONFIGS.SETTINGS_STORAGE, false);
     if (!settings) return DEFAULT_APP_CONFIGS;
     return settings;
 }
