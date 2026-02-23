@@ -278,9 +278,9 @@ export async function withRetries(
     return false;
 }
 
-export async function saveData(key: string, data: any, type: StorageType): Promise<boolean> {
+export async function saveData(key: string, data: any, type: StorageType, log: boolean=true): Promise<boolean> {
     if (type == StorageType.NONE) {
-        console.warn("Tried to save data to storage, but type is NONE. Skipping.");
+        if (log) console.warn("Tried to save data to storage, but type is NONE. Skipping.");
         return false;
     }
 
@@ -305,16 +305,16 @@ export async function saveData(key: string, data: any, type: StorageType): Promi
             break;
     }
     if (saveOutput[0]) {
-        console.error(`Failed to save data. key: ${key}, value: ${data}, storage: ${type}`);
+        if (log) console.error(`Failed to save data. key: ${key}, value: ${data}, storage: ${type}`);
         return false;
     }
-    console.info(`Saved data. key: ${key}, value: ${data}, storage: ${type}`);
+    if (log) console.info(`Saved data. key: ${key}, value: ${data}, storage: ${type}`);
     return true;
 }
 
-export async function loadData<T>(key: string | string[] | Record<string, any>, type: StorageType): Promise<T | null> {
+export async function loadData<T>(key: string | string[] | Record<string, any>, type: StorageType, log: boolean=true): Promise<T | null> {
     if (type == StorageType.NONE) {
-        console.warn("Tried to load data from storage, but type is NONE. Skipping.");
+        if (log) console.warn("Tried to load data from storage, but type is NONE. Skipping.");
         return null;
     }
 
@@ -340,7 +340,7 @@ export async function loadData<T>(key: string | string[] | Record<string, any>, 
     }
     const [loadErr, result] = loadOutput;
     if (loadErr || result === null) {
-        console.error(`Failed to load data. key: ${key}, storage: ${type}`);
+        if (log) console.error(`Failed to load data. key: ${key}, storage: ${type}`);
         return null;
     }
     let returnValue: T | null = null;
@@ -357,18 +357,18 @@ export async function loadData<T>(key: string | string[] | Record<string, any>, 
         return null;
     }
     if (returnValue !== null)  {
-        console.info(`Loaded data. key: ${key}, storage: ${type}`);
+        if (log) console.info(`Loaded data. key: ${key}, storage: ${type}`);
     } else {
-        console.error(`Failed to load data. key: ${key}, storage: ${type}`);
+        if (log) console.error(`Failed to load data. key: ${key}, storage: ${type}`);
     }
 
     return returnValue;
 }
 
 
-export async function removeData(key: string | string[], type: StorageType): Promise<boolean> {
+export async function removeData(key: string | string[], type: StorageType, log: boolean=true): Promise<boolean> {
     if (type == StorageType.NONE) {
-        console.warn("Tried to remove data from storage, but type is NONE. Skipping.");
+        if (log) console.warn("Tried to remove data from storage, but type is NONE. Skipping.");
         return false;
     }
 
@@ -393,10 +393,10 @@ export async function removeData(key: string | string[], type: StorageType): Pro
             break;
     }
     if (removeOutput[0]) {
-        console.error(`Failed to remove data. key: ${key}, storage: ${type}`);
+        if (log) console.error(`Failed to remove data. key: ${key}, storage: ${type}`);
         return false;
     }
-    console.info(`Removed data. key: ${key}, storage: ${type}`);
+    if (log) console.info(`Removed data. key: ${key}, storage: ${type}`);
     return true;
 }
 

@@ -233,9 +233,8 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, _tab) => {
 chrome.tabs.onRemoved.addListener((tabId, _removeInfo) => {
     getSettingsOrDefault().then(configs => {
         if (configs.tasksRememberLast) {
-            <Promise<string | null>>loadData(tabIdToUrlKeyTransform(tabId), CONST_CONFIGS.TASK_ID_TO_URL_MAP_STORAGE).then(loadedData => {
+            <Promise<string | null>>loadData(tabIdToUrlKeyTransform(tabId), CONST_CONFIGS.TASK_ID_TO_URL_MAP_STORAGE, false).then(loadedData => {
                 const url: string | null = loadedData as string | null;
-                console.info("url: ", url);
                 if (url && url.trim().startsWith(CONST_CONFIGS.TASKS.MULTIMANGO_PREFIX)) {
                     saveData(StoredData.LAST_TASK_URL, url, CONST_CONFIGS.LAST_TASK_URL_STORAGE).then(_r => {
                         removeData(tabId.toString(), CONST_CONFIGS.TASK_ID_TO_URL_MAP_STORAGE).then();
