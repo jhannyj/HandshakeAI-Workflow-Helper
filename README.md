@@ -59,6 +59,7 @@ The only requirement is that the Handshake AI page must remain open. The Multima
 > **This extension is an independent tool and is not officially associated with, endorsed by, or affiliated with Handshake, Handshake AI, or Multimango.** Use of this tool is at your own risk.
 
 ## TODO
+- [ ] fix: reload Handshake AI tab if the tab with url is open, but Message response is not received because "receiving end does not exist"
 - [ ] feat: add an option to track and log task completion separately from Handshake and allow Downloading of logs for bookkeeping. 
 - [ ] feat: add an option to capture a "true" screenshot of the feedback page using desktopCapture API
 - [ ] chore: Handle users aren’t logged into Handshake AI or Multimango.
