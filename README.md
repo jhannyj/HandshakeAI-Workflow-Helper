@@ -5,6 +5,9 @@
 **HandshakeAI Workflow Helper** is a productivity-focused browser extension designed to eliminate the manual overhead of synchronizing task data between **Multimango** and **Handshake AI**.
 
 By automating data extraction and entry, this tool ensures your QA feedback and task progress are tracked accurately and reflected in real-time across both platforms.
+With a simple click
+
+** On install, close all Handshake AI and Multimango tabs and open the extension. This is so that in the future, the extension is loaded into the Handshake AI and Multimango tabs.
 
 ---
 
@@ -59,9 +62,11 @@ The only requirement is that the Handshake AI page must remain open. The Multima
 > **This extension is an independent tool and is not officially associated with, endorsed by, or affiliated with Handshake, Handshake AI, or Multimango.** Use of this tool is at your own risk.
 
 ## TODO
-- [ ] fix: reload Handshake AI tab if the tab with url is open, but Message response is not received because "receiving end does not exist"
-- [ ] feat: use Google AI to find elements and verify data submission received
-- [ ] feat: add an option to track and log task completion separately from Handshake and allow Downloading of logs for bookkeeping. 
+- [ ] feat: add an option to track and log task completion separately from Handshake and allow Downloading of logs for bookkeeping.
+- [ ] feat: filter out tasks that the user does not have access to from Handshake AI.
+- [ ] feat: add expected task time to Multimago page
 - [ ] feat: add an option to capture a "true" screenshot of the feedback page using desktopCapture API
+- [ ] feat: use Google AI to find elements and verify data submission received
+- [ ] fix: reload Handshake AI tab if the tab with url is open, but Message response is not received because "receiving end does not exist" - occurs when users install the extension but don't open it before opening Handshake AI or Multimango.
 - [ ] chore: Handle users aren’t logged into Handshake AI or Multimango.
 - [ ] chore: Forward errors and info from content scripts to the background script for easy of visibility OR add a create log option
